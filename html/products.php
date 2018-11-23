@@ -6,8 +6,9 @@
     $db_name = "Project";
 
     $conn = mysqli_connect($servername,$server_username, $server_password ,$db_name );
-   
+
     session_start();
+    
 ?> 
 
 <html>
@@ -41,7 +42,7 @@
                     
                 ?>
                 <form method="POST" action="cart.php">
-           <td>
+            <td>
             <div class="product">
             <img src="<?php echo $row["image"]; ?>" alt="<?php echo $row["name"];?>" class="img">
             <h5 class ="product_name"> <?php echo $row["brand"] . ' ' .$row["name"]; ?></h5> 
@@ -87,6 +88,7 @@
             </form>
             <?php
             }
+            cart();
         ?>
         
         </table>

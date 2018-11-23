@@ -55,6 +55,9 @@
                     <input type="number" name="qty" value="<?php echo $value ?>"><br>  
                     <?php
                       
+
+
+                      
                     }
             }
             }

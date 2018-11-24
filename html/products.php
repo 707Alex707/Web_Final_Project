@@ -81,14 +81,16 @@
                 </tr>
            <?php }
             } ?>
+             </form>
+             <form method="POST" action="cart.php">
               <tr>
-                <button type="submit" name="check">Check cart</button>
-      
+                <button name="check" >Check cart</button>
+            
             </tr>
-            </form>
+           </form>
             <?php
             }
-            cart();
+          
         ?>
         
         </table>

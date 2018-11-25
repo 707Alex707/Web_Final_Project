@@ -1,5 +1,13 @@
 <?php
-session_start();
+    $servername = "vps4.uoit.tk";
+    $server_username = "Project";
+    $server_password = "Project!";
+    $db_name = "Project";
+   
+    session_start();
+    $x=1;
+    $conn = mysqli_connect($servername,$server_username, $server_password ,$db_name );
+
 ?>
 
 
@@ -9,7 +17,7 @@ session_start();
 <body>
 
 
-      <form action="">
+      <form method = "POST" action="">
             <h3>Billing Address</h3>
             <label for="fname">Full Name</label>
             <input type="text" id="fname" name="firstname" placeholder="John Smith"><br>
@@ -59,7 +67,7 @@ session_start();
         <label>
           <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
         </label><br>
-        <input type="submit" value="Continue to checkout" class="btn">
+        <button type="submit" name="pay">Place Order</button>
       </form>
     </div>
   </div>
@@ -72,14 +80,28 @@ session_start();
           <b><?php echo $_SESSION["count"];?></b>
         </span>
       </h4>
-      <p>Product 1 <span class="price"></span></p>
-      <p>Product 1 <span class="price"></span></p>
-      <p>Product 1 <span class="price"></span></p>
-      <p>Product 1 <span class="price"></span></p>
+      <p> <?php foreach($_SESSION as $name => $value){
+            if ($value>0){
+                if (substr($name, 0, 4)=='cart'){
+                    $id = substr($name, 4, (strlen($name)-4));
+                    $get =  mysqli_query($conn, "SELECT * FROM `products` WHERE id_product='$id' ");
+                    while($get_row = mysqli_fetch_assoc($get)){ ?>
+                   
+      <p>Product <?php echo $x; $x++;?> <span class="price">$<?php echo number_format($price =$get_row["price"]*$value, 2); ?></span></p>
+      
+      <?php 
+                    }
+                  }
+                }
+                    }      ?>
       <hr>
-      <p>Total <span class="price" style="color:black"><b><?php echo $_SESSION["total"];?></b></span></p>
+      <p>Total <span class="price"><b><?php echo number_format($_SESSION["total"],2);?></b></span></p>
     </div>
   </div>
+  <?php if (isset($_POST['pay'])){
+      session_destroy(); //remove this when order history is created
+        header('Location: products.php');   //Change to proper order history page
+   }?>
 </div>
 </body>
 </html>

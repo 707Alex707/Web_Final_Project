@@ -1,3 +1,4 @@
+// Login Modal
 var modal_login = document.getElementById('modal-login');
 var loginbtn = document.getElementById("loginBtn");
 var loginspan = document.getElementsByClassName("loginClose")[0];
@@ -20,7 +21,27 @@ window.onclick = function(event) {
 }
 
 
+// Register Modal
+var modal_register = document.getElementById('modal-register');
+var registerbtn = document.getElementById("registerBtn");
+var registerspan = document.getElementsByClassName("registerClose")[0];
 
+// When the user clicks on the button, open the modal 
+registerbtn.onclick = function() {
+    modal_register.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+registerspan.onclick = function() {
+    modal_register.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal_register) {
+        modal_register.style.display = "none";
+    }
+}
 
 
 

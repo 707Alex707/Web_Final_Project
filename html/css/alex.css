@@ -1,0 +1,28 @@
+.bg-blue{
+    background-color: deepskyblue;
+}
+
+.bg-grey{
+    background-color: white ;
+}
+
+.span-vh{
+    height: 97vh;
+}
+
+.span-vh5{
+    height: 3vh;
+}
+
+.bg-black{
+    background-color: black;
+}
+
+.w-90 {
+    width: 90%;
+}
+
+body {
+    padding-top: 55px;
+}
+

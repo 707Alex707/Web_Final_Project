@@ -1,4 +1,5 @@
 <?php
+include 'modal.php';
     //Database
     $servername = "vps4.uoit.tk";
     $server_username = "Project";
@@ -15,6 +16,8 @@
 </head>
 
 <body>
+
+
     <div class="container">
         <h2>Products</h2>
         <p id="demo">
@@ -33,40 +36,46 @@
             $columns = 0;
                 if($count>0){
                     while($row = mysqli_fetch_array($result)){
-                        if ($columns < 3){       
+                        if ($columns < 2){       
             ?>
                         <form method="POST" action="cart.php">
-            <td>
+                    <td>
                         <div class="product">
-                            <img src="<?php echo $row["image"]; ?>" alt="<?php echo $row["name"];?>" class="img">
+                            <img src="<?php echo $row["image"]; ?>" alt="<?php echo $row["name"];?>" onclick="showModal(<?php echo $row['id_product']; ?>);" class="img">
                             <h5 class ="product_name"> <?php echo $row["brand"] . ' ' .$row["name"]; ?></h5> 
                             <h5 class ="product_price">CAD$ <?php echo $row["price"]; ?></h5>   
-                            <button name="add" id="cart" value="<?php echo $row["id_product"]; ?>"> Add to Cart</button><br><br>             
+                                         
+                            <?php echo $row["id_product"] ; ?>
                         </div>
-
-
- 
-                <!-- The Modal (DONT WORRY ABOUT THIS)-->
-                <div class="modal">
-                    <!-- Modal content -->
-                    <div class="modal-content">
-                        <span class="close">&times;</span>
-                        <img  src="<?php echo $row["image"]; ?>" alt="<?php echo $row["name"];?>" class="modal_image">
-                        <h5 class ="product_name"> <?php echo $row["brand"] . ' ' .$row["name"]; ?></h5> 
-                        <h5 class ="product_price">CAD$ <?php echo $row["price"]; ?></h5>
-                    </div>
-                </div>
-            </td>
+                        </td>
             
 
             <?php  
             ++$columns;
             }else{
                 $columns = 0;
-                ?>
+                ?>  <td>
+                        <img src="<?php echo $row["image"]; ?>" alt="<?php echo $row["name"];?>" onclick="showModal(<?php echo $row['id_product']; ?>);" class="img">
+                        <h5 class ="product_name"> <?php echo $row["brand"] . ' ' .$row["name"]; ?></h5> 
+                        <h5 class ="product_price">CAD$ <?php echo $row["price"]; ?></h5>   
+                                         
+                        <?php echo $row["id_product"] ; ?>
+                    <td> 
                 </tr>
-           <?php }
-            } ?>
+
+           <?php } ?>
+                            <!-- The Modal (DONT WORRY ABOUT THIS)-->
+                            <div class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <img  src="<?php echo $row["image"]; ?>" alt="<?php echo $row["name"];?>" class="modal_image">
+                        <h5 class ="product_name"> <?php echo $row["brand"] . ' ' .$row["name"]; ?></h5> 
+                        <h5 class ="product_price">CAD$ <?php echo $row["price"]; ?></h5>
+                        <button name="add" id="cart" value="<?php echo $row["id_product"];?>"> Add to Cart</button><br><br>
+                    </div>
+                </div>
+           <?php } ?>
             </form>
             <form method="POST" action="cart.php">
                 <tr>

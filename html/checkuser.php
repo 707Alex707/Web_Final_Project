@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 <html>
 <body>
-=======
->>>>>>> a46e4aa44c45bf8c6a58083d1bf2a5c34ee78e94
 <?php
 session_start();
 $_SESSION["servername"] = "vps4.uoit.tk";
@@ -10,11 +7,8 @@ $_SESSION["server_username"] = "Project";
 $_SESSION["server_password"] = "Project!";
 $_SESSION["db_name"] = "Project";
 
-<<<<<<< HEAD
 $errorLogin =array();
 $errorRegister =array();
-=======
-$errors =array();
 
 
 $conn = mysqli_connect($_SESSION["servername"],$_SESSION["server_username"], $_SESSION["server_password"] ,$_SESSION["db_name"] );
@@ -34,13 +28,8 @@ if ($count==1){
    
 }
 else{
-<<<<<<< HEAD
    array_push($errorLogin, "Invalid Username/Password");
    $_SESSION['errorLogin']=$errorLogin;
-=======
-   array_push($errors, "Invalid Username/Password");
-   $_SESSION['errors']=$errors;
->>>>>>> a46e4aa44c45bf8c6a58083d1bf2a5c34ee78e94
    header('Location: home.php');
 }
 }
@@ -54,7 +43,6 @@ if(isset($_POST['register'])){
    $user = mysqli_fetch_assoc($usercheck);
 
    if(empty($myusername)){
-<<<<<<< HEAD
       array_push($errorRegister, "Enter Username");
          $_SESSION['errorRegister']=$errorRegister;
    }
@@ -66,24 +54,10 @@ if(isset($_POST['register'])){
    if($user['username'] === $myusername){
      array_push($errorRegister, "Username taken");
       $_SESSION['errorRegister']=$errorRegister;
-=======
-      array_push($errors, "Enter Username");
-         $_SESSION['errors']=$errors;
-   }
-   if(empty($mypassword)){
-      array_push($errors, "Enter Password");
-         $_SESSION['errors']=$errors;
-   }
-   
-   if($user['username'] === $myusername){
-     array_push($errors, "Username taken");
-      $_SESSION['errors']=$errors;
->>>>>>> a46e4aa44c45bf8c6a58083d1bf2a5c34ee78e94
      
    }
   
    if($mypassword != $confirm_pass){
-<<<<<<< HEAD
       array_push($errorRegister, "Passwords do not match");
       $_SESSION['errorRegister']=$errorRegister;
    }
@@ -111,19 +85,3 @@ if(isset($_POST['register'])){
 </body>
 
 </html>
-=======
-      array_push($errors, "Passwords do not match");
-      $_SESSION['errors']=$errors;
-   }
-
-   if(count($errors)== 0){
-   $register = mysqli_query($conn, "INSERT INTO `Accounts` (`id`, `username`, `password`) VALUES (NULL, '$myusername', '$mypassword')");
-   $_SESSION["user"]= $myusername;
-   header('Location: welcome.php');
-   }else{
-      header('Location: home.php#modal-login');
-   }
-}
-
-?>
->>>>>>> a46e4aa44c45bf8c6a58083d1bf2a5c34ee78e94

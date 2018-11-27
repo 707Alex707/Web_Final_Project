@@ -4,9 +4,10 @@ var loginbtn = document.getElementById("loginBtn");
 var loginspan = document.getElementsByClassName("loginClose")[0];
 
 // When the user clicks on the button, open the modal 
-loginbtn.onclick = function() {
+function login(){
     modal_login.style.display = "block";
-}
+    modal_register.style.display = "none";
+
 
 // When the user clicks on <span> (x), close the modal
 loginspan.onclick = function() {
@@ -19,6 +20,7 @@ window.onclick = function(event) {
         modal_login.style.display = "none";
     }
 }
+}
 
 
 // Register Modal
@@ -27,9 +29,9 @@ var registerbtn = document.getElementById("registerBtn");
 var registerspan = document.getElementsByClassName("registerClose")[0];
 
 // When the user clicks on the button, open the modal 
-registerbtn.onclick = function() {
+function register(){
     modal_register.style.display = "block";
-}
+    modal_login.style.display = "none";
 
 // When the user clicks on <span> (x), close the modal
 registerspan.onclick = function() {
@@ -42,6 +44,7 @@ window.onclick = function(event) {
         modal_register.style.display = "none";
     }
 }
+}
 
 
 
@@ -49,8 +52,8 @@ window.onclick = function(event) {
 
 
 
-//------------------------------------------------------------------------------
-var x=0;
+//----------Modal for Product page---------------------------------------------------
+
 // Get the modal
 var modal = document.getElementsByClassName('modal');
 

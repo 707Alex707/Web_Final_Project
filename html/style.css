@@ -40,6 +40,15 @@ li a:hover:not(.active) {
     font-size: 16px;
 }
 
+.left-sidebar{
+    display: block;
+    float: left;
+    background-color: grey;
+    width: 200px;
+    height: 100%;
+
+}
+
 /* Login Modal */
 .modal-login {
     display: none; /* Hidden by default */
@@ -91,7 +100,6 @@ li a:hover:not(.active) {
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 
-<<<<<<< HEAD
 }
 
 /* Modal Content/Box */
@@ -112,28 +120,6 @@ li a:hover:not(.active) {
     font-weight: bold;
 }
 
-=======
-}
-
-/* Modal Content/Box */
-.modal-register-content {
-    background-color: #fefefe;
-    margin: 8% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 30%; /* Could be more or less, depending on screen size */
-    height: 70%;
-}
-
-/* The Close Button */
-.registerClose {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
->>>>>>> a46e4aa44c45bf8c6a58083d1bf2a5c34ee78e94
 .registerClose:hover,
 .registerClose:focus {
     color: black;
@@ -173,15 +159,35 @@ li a:hover:not(.active) {
     padding: 20px;
   }
 
+/* Product Home Page */
+.product:hover{
+    border: 1px solid rgba(128, 128, 128, 0.582);
+    background-color: white;
 
+}
+.product{
+    margin-right: 100px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    
+}
+
+.container {
+    margin-left: 340px;
+    margin-right: 100px;
+    margin-top: 100px;
+}
+img .img{
+    padding: 50px;
+}
 
 
 
 /* idk yet */
 
 .img {
-    height: 200px;
-    width: 200px;
+    height: 250px;
+    width: 250px;
     padding: 10px;
 }
 
@@ -190,12 +196,14 @@ li a:hover:not(.active) {
     width: 400px;
     padding: 10px;
 }
-.container {
-    margin:500px;
-    margin-top: 100px;
-}
 
-/* TEST*/
+
+
+
+
+
+
+
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */

@@ -25,7 +25,7 @@ include 'modal.php';
 
     -->
     <div class="left-sidebar">
-        <p></p>
+        <p align="center"><a href="home.php"><b>Home</b></a><br><br><a href="aboutus.html"><b>About Us</b></a></p>
     </div>
     <!-- Container for all products -->
     <div class="container">

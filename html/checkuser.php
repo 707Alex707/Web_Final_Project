@@ -10,10 +10,12 @@ $_SESSION["db_name"] = "Project";
 $errorLogin =array();
 $errorRegister =array();
 
+//$pass_hased = hash('sha512', $_POST['pass']);
+
 
 $conn = mysqli_connect($_SESSION["servername"],$_SESSION["server_username"], $_SESSION["server_password"] ,$_SESSION["db_name"] );
    $myusername = mysqli_real_escape_string($conn,$_POST['user']);
-   $mypassword = mysqli_real_escape_string($conn,$_POST['pass']);
+   $mypassword = mysqli_real_escape_string($conn, $_POST['pass']);
 
 // Login Form
 if(isset($_POST['login'])){

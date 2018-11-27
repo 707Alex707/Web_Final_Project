@@ -16,8 +16,6 @@ $errorRegister =array();
 =======
 $errors =array();
 
->>>>>>> a46e4aa44c45bf8c6a58083d1bf2a5c34ee78e94
-
 
 $conn = mysqli_connect($_SESSION["servername"],$_SESSION["server_username"], $_SESSION["server_password"] ,$_SESSION["db_name"] );
    $myusername = mysqli_real_escape_string($conn,$_POST['user']);

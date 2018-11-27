@@ -34,10 +34,6 @@
 if(isset($_GET['logout'])){
    session_destroy();
    unset($_SESSION["user"]);
-<<<<<<< HEAD
    header('location: home.php');
-=======
-   header('location: login.php');
->>>>>>> a46e4aa44c45bf8c6a58083d1bf2a5c34ee78e94
 }
 ?>     

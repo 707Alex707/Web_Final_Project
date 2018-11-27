@@ -16,10 +16,20 @@ include 'modal.php';
 </head>
 
 <body>
+    <!---
 
 
+
+     INSERT NAVBAR
+
+
+    -->
+    <div class="left-sidebar">
+        <p></p>
+    </div>
+    <!-- Container for all products -->
     <div class="container">
-        <h2>Products</h2>
+    <h2>Products</h2>
         <p id="demo">
         <?php 
          if(isset($_SESSION["count"]))
@@ -28,6 +38,7 @@ include 'modal.php';
          }
          ?>
          </p>
+
         <table>
             <tr>
             <?php
@@ -40,12 +51,13 @@ include 'modal.php';
             ?>
                         <form method="POST" action="cart.php">
                     <td>
+                        <!-- Container for each product -->
                         <div class="product">
                             <img src="<?php echo $row["image"]; ?>" alt="<?php echo $row["name"];?>" onclick="showModal(<?php echo $row['id_product']; ?>);" class="img">
                             <h5 class ="product_name"> <?php echo $row["brand"] . ' ' .$row["name"]; ?></h5> 
                             <h5 class ="product_price">CAD$ <?php echo $row["price"]; ?></h5>   
                                          
-                            <?php echo $row["id_product"] ; ?>
+                            
                         </div>
                         </td>
             
@@ -55,16 +67,19 @@ include 'modal.php';
             }else{
                 $columns = 0;
                 ?>  <td>
+                        <!-- Container for each product -->
+                        <div class="product">
                         <img src="<?php echo $row["image"]; ?>" alt="<?php echo $row["name"];?>" onclick="showModal(<?php echo $row['id_product']; ?>);" class="img">
                         <h5 class ="product_name"> <?php echo $row["brand"] . ' ' .$row["name"]; ?></h5> 
                         <h5 class ="product_price">CAD$ <?php echo $row["price"]; ?></h5>   
+                        </div>
                                          
-                        <?php echo $row["id_product"] ; ?>
+                        
                     <td> 
                 </tr>
 
            <?php } ?>
-                            <!-- The Modal (DONT WORRY ABOUT THIS)-->
+                            <!-- The Pop up for each product-->
                             <div class="modal">
                     <!-- Modal content -->
                     <div class="modal-content">

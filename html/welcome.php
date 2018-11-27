@@ -15,7 +15,7 @@
    <div class= "welcomeblock">
       <div class= "topbar">
    <form method="GET">
-      <p class="welcome"><Strong>Welcome <?php echo $_SESSION["user"] ?></Strong></p> 
+      <p class="welcome" align="center"><Strong>Welcome <?php echo $_SESSION["user"] ?></Strong></p> 
 
       <p class="content">
       This is <?php echo $_SESSION["user"] ?>'s account page.

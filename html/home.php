@@ -19,7 +19,7 @@
     <ul>
         <li><a class="active" href="home.php">Home</a></li>
         <li><a href="products.php">Shoes</a></li>
-        <li><a href="">About</a></li>
+        <li><a href="aboutus.html">About</a></li>
         
         <span class = "login"><li><button id="loginBtn" onclick="login();" class="login-btn" >Account</button></li></span>
     </ul>

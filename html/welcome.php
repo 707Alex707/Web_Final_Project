@@ -21,15 +21,19 @@
       This is <?php echo $_SESSION["user"] ?>'s account page.
       </p>
       
-      <img src="" alt = "User Wallpaper Picture" width = "auto" height = "540px"> /* User should be able to upload profile image and wallpaper image to his acount database or choose one from defaults*/
-      <img src="" alt = "User Profile Picture Here" width = "200px" height= "200px"> 
-      <div>
-               <p>Your Recent Activity</p> /* From Cookies we should be able to look at history and show what user has looked at.*/
-         <ul>
-            <li>You looked @ img 1</li> 
-            <li>You looked @ img 2</li>
-            <li>You looked @ img 3</li>
-         </ul>
+      <img src="images/34.jpg" alt = "User Wallpaper Picture" width = "1890px" height = "540px"> 
+      <hr>
+      
+      <div align="left">
+      			<img src="images/34.jpg" alt = "User Profile Picture Here" width = "200px" height= "200px"> 
+               <h1 align="center">Your Recent Activity</h1> 
+               <hr>
+               <img src="images/34.jpg" alt="Img1" height="300px" width="300px" align="left">
+               <img src="images/34.jpg" alt="Img2" height="300px" width="300px" align="">
+               <img src="images/34.jpg" alt="Img2" height="300px" width="300px" align=""><img src="images/34.jpg" alt="Img2" height="300px" width="300px" align="">
+               <img src="images/34.jpg" alt="Img2" height="300px" width="300px" align="">              
+               <img src="images/34.jpg" alt="Img3" height="300px" width="300px" align="right">
+
       </div>
      
 

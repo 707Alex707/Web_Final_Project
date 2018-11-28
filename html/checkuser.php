@@ -7,33 +7,32 @@ $_SESSION["server_username"] = "Project";
 $_SESSION["server_password"] = "Project!";
 $_SESSION["db_name"] = "Project";
 
-$errorLogin =array();
-$errorRegister =array();
-
-//$pass_hased = hash('sha512', $_POST['pass']);
+$errors =array();
+$errors =array();
 
 
 $conn = mysqli_connect($_SESSION["servername"],$_SESSION["server_username"], $_SESSION["server_password"] ,$_SESSION["db_name"] );
    $myusername = mysqli_real_escape_string($conn,$_POST['user']);
-   $mypassword = mysqli_real_escape_string($conn, $_POST['pass']);
+   $mypassword = mysqli_real_escape_string($conn,$_POST['pass']);
 
 // Login Form
 if(isset($_POST['login'])){
-   
-$result = mysqli_query($conn,"SELECT * FROM `Accounts` WHERE `username` = '$myusername' && `password` = '$mypassword'");
-$count = mysqli_num_rows($result);
 
-if ($count==1){
+      $result = mysqli_query($conn,"SELECT * FROM `Accounts` WHERE `username` = '$myusername' && `password` = '$mypassword'");
+      $count = mysqli_num_rows($result);
 
-   $_SESSION["user"]= $myusername;
-   header('Location: welcome.php');
+         if ($count==1){
+            $_SESSION['user']= $myusername;
+            header('Location:welcome.php');
+            
+         }
+         else{
+            array_push($errors, "Invalid Username/Password");
+            $_SESSION['errors']=$errors;
+            header('Location: login.php');
+         }
+         
    
-}
-else{
-   array_push($errorLogin, "Invalid Username/Password");
-   $_SESSION['errorLogin']=$errorLogin;
-   header('Location: home.php');
-}
 }
 
 
@@ -45,36 +44,36 @@ if(isset($_POST['register'])){
    $user = mysqli_fetch_assoc($usercheck);
 
    if(empty($myusername)){
-      array_push($errorRegister, "Enter Username");
-         $_SESSION['errorRegister']=$errorRegister;
+      array_push($errors, "Enter Username");
+         $_SESSION['errors']=$errors;
    }
    if(empty($mypassword)){
-      array_push($errorRegister, "Enter Password");
-         $_SESSION['errorRegister']=$errorRegister;
+      array_push($errors, "Enter Password");
+         $_SESSION['errors']=$errors;
    }
    
    if($user['username'] === $myusername){
-     array_push($errorRegister, "Username taken");
-      $_SESSION['errorRegister']=$errorRegister;
+     array_push($errors, "Username taken");
+      $_SESSION['errors']=$errors;
      
    }
   
    if($mypassword != $confirm_pass){
-      array_push($errorRegister, "Passwords do not match");
-      $_SESSION['errorRegister']=$errorRegister;
+      array_push($errors, "Passwords do not match");
+      $_SESSION['errors']=$errors;
    }
 
-   if(count($errorRegister)== 0 && count($errorLogin)==0){
+   if(count($errors)== 0 && count($errors)==0){
    $register = mysqli_query($conn, "INSERT INTO `Accounts` (`id`, `username`, `password`) VALUES (NULL, '$myusername', '$mypassword')");
    $_SESSION["user"]= $myusername;
    header('Location: welcome.php');
-   }elseif(count($errorRegister)>0){
-        $_SESSION['errorRegister']=$errorRegister;
-      header('Location: home.php');
-   }elseif(count($errorLogin)>0){
-    $_SESSION['errorLogin']=$errorLogin;
+   }elseif(count($errors)>0){
+        $_SESSION['errors']=$errors;
+      header('location:javascript://history.go(-3)');
+   }elseif(count($errors)>0){
+    $_SESSION['errors']=$errors;
     
-    header('Location: home.php');
+    header('Location: register.php');
  }
 }
 

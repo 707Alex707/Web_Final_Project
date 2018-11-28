@@ -1,8 +1,11 @@
-
+<?php 
+session_start();
+if (!isset($_SESSION['user'])){?>
 <html>
     <head>
         <title>Login Page</title>
         <link rel="stylesheet" type="text/css" href="assignment3.css">
+        
     </head>
     <body>
     
@@ -45,3 +48,7 @@
    
     </body>
 </html>
+    <?php }else{
+        header('Location:welcome.php');
+    }
+        ?>

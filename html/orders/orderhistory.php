@@ -64,7 +64,7 @@ for($i = 0; $i < sizeof($ordernum_array); $i ++){
         echo("ProductID:".$row['id_product']." Qty".$row['qty']."<br>");
     }
 
-    
+
 }
 
 

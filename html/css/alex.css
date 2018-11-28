@@ -30,3 +30,11 @@ body {
     height: 400px;  /* The height is 400 pixels */
     width: 50%;  /* The width is the width of the web page */
 }
+
+table {
+    border-collapse: collapse;
+}
+
+.table-outline table, .table-outline th, .table-outline td {
+    border: 1px solid black;
+}

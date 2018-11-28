@@ -9,6 +9,8 @@
 
     $conn = mysqli_connect($servername,$server_username, $server_password ,$db_name );
     $id = mysqli_real_escape_string($conn,$_POST['add']);
+    $myusername=$_SESSION["user"];
+    echo $myusername;
 
 ?> 
 <html>
@@ -37,10 +39,10 @@
             if (substr($name, 0, 4)=='cart'){
                 $id = substr($name, 4, (strlen($name)-4));
                 $get =  mysqli_query($conn, "SELECT * FROM `products` WHERE id_product='$id' ");
+               ?> <form method="POST" oninput="x.value = qty.value *<?php echo $get_row['price'];?> "><?php
+                    
                     while($get_row = mysqli_fetch_assoc($get)){ ?>
-
-                    <!-- Form -->
-                    <form method="POST" oninput="x.value = qty.value *<?php echo $get_row['price'];?> ">
+                    
                     <img src="<?php echo $get_row["image"]; ?>" alt="<?php echo $get_row["name"];?>" class="img">
                     <h4 class ="product_name"> <?php echo $get_row["brand"] . ' ' .$get_row["name"]; ?></h4> 
                     <h4 class ="product_price">CAD$ 
@@ -48,7 +50,7 @@
                     <input type="number" id="qty" name="qty" value="<?php echo  $value ?>" min ="1" max="<?php echo $get_row["qty"] ?>"> 
                     <button type="submit" name="update" value="<?php echo $get_row["id_product"]; ?>">Update</button>
                     <button type="submit" name="delete" value="<?php echo $get_row["id_product"]; ?>">Remove</button><br>
-                    </form>
+                    
                     <?php
                     //Don't Touch buggy af
                     $total += $price;
@@ -60,8 +62,10 @@
     }
     ?>
        
-    <form method="POST">
+    
     <button type="submit" name="checkout">Checkout</button>
+</form>
+    <form method="POST">
     <button name="return" >Continue Shopping</button>
     </form>
 
@@ -70,6 +74,7 @@
     // To test counter lmao
     echo $counttotal;
     $_SESSION["total"] =$total;
+    
     // ------------------------------------------------------------- End of the display of cart page -----------------------------------------------------------------------
 
         // Checkout
@@ -77,6 +82,7 @@
             if ($_SESSION["total"] == 0){
                 echo "no products in your cart";
             }else{
+                $_SESSION["user"] = $myusername;
                 header('Location: purchase.php');
             }
         }

@@ -7,25 +7,45 @@ include 'modal.php';
     $db_name = "Project";
     $conn = mysqli_connect($servername,$server_username, $server_password ,$db_name );
     session_start();
+    $myusername=$_SESSION["user"];
+    echo $myusername;
 ?> 
 
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="style.css">
+<link href='https://fonts.googleapis.com/css?family=Buenard' rel='stylesheet'>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <title>Product Page</title>
 </head>
 
 <body>
-    <!---
+    <!-- Navbar-->
+    
+    <div class="topnav">
+    <ul>
+        
+        <li><a  href="home.php">Home</a></li>
+        <li><a class="active" href="products.php">Shoes</a></li>
+        <li><a href="aboutus.html">About</a></li>
+        <li><a href="login.php" class="acc"> <?php 
+         if(isset($_SESSION["user"])) {
+             echo $_SESSION["user"]; 
+             
+        }else{
+              echo "Login"; 
+        }
+        ?><i class="material-icons" id="icon">person</i></a> </li>
+        <li class="navbar-store">NAME OF STORE</li>
 
+    </ul>
+    </div>
 
+    <!-- End of Navbar -->          
 
-     INSERT NAVBAR
-
-
-    -->
     <div class="left-sidebar">
-        <p align="center"><a href="home.php"><b>Home</b></a><br><br><a href="aboutus.html"><b>About Us</b></a></p>
+        <p></p>
     </div>
     <!-- Container for all products -->
     <div class="container">
@@ -56,8 +76,6 @@ include 'modal.php';
                             <img src="<?php echo $row["image"]; ?>" alt="<?php echo $row["name"];?>" onclick="showModal(<?php echo $row['id_product']; ?>);" class="img">
                             <h5 class ="product_name"> <?php echo $row["brand"] . ' ' .$row["name"]; ?></h5> 
                             <h5 class ="product_price">CAD$ <?php echo $row["price"]; ?></h5>   
-                                         
-                            
                         </div>
                         </td>
             
@@ -91,10 +109,11 @@ include 'modal.php';
                     </div>
                 </div>
            <?php } ?>
-            </form>
-            <form method="POST" action="cart.php">
+        
+            
                 <tr>
                     <button name="check" >Check cart</button>
+
                 </tr>
             </form>
             <?php } ?>

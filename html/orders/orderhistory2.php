@@ -27,7 +27,6 @@ $usercheck = mysqli_query($connection,"SELECT * FROM `Accounts` WHERE username='
 $user = mysqli_fetch_assoc($usercheck);
 $userid=$user['id'];
 
-
 //Calls method to lookup orders saves orders in list
 $ordernum_array = array();
 $ordernum_array = mysql_fetch("orders", "id='$userid'", "ordernum");

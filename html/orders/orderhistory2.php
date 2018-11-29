@@ -32,6 +32,9 @@ $ordernum_array = array();
 $ordernum_array = mysql_fetch("orders", "id='$userid'", "ordernum");
 
 //Creates a 3D array containg all order information
+//depth 1, order
+//depth 2, products
+//depth 3, product details
 $orders = array();
 for($b = 0; $b < sizeof($ordernum_array); $b++) {
 
@@ -57,20 +60,46 @@ for($b = 0; $b < sizeof($ordernum_array); $b++) {
         $temp = mysql_fetch("order_items", "ordernum='$ordernum_array[$b]' AND id_product='$order_products[$a]'", "qty");
         $order_data[$a][3] = $temp[0];
 
-        //Calculates subtotal
+        //Calculates subtotal for each product
         $order_data[$a][4] = (double)$order_data[$a][0] * (double)$order_data[$a][3];
+
+        //Initalizes value
+        $order_data[$a][5] = 0;
+
+        //Gets date and time of when order was placed
+        mysql_fetch("orders", "ordernum='$ordernum_array[$b]'", "date");
+
+
+
+    }
+    //Adds all products of an order to a larger array containing all orders
+    $orders[$b] = $order_data;
+
+    //Not the best solution but works, adds order total
+    for($c = 0; $c < sizeof($orders[$b][$c]);$c++){
+        $orders[$b][0][5] = (double)$orders[$b][0][5] + (double)$orders[$b][$c][4];
     }
 
-    $orders[$b] = $order_data;
+    //Gets date and time of when order was placed
+    $temp = mysql_fetch("orders", "ordernum='$ordernum_array[$b]'", "date");
+    $orders[$b][0][6] = $temp[0];
 }
+
+
 
 //Cycles through orders
 for ($a = 0; $a < sizeof($ordernum_array); $a++){
 
-    echo("<h4>Order number ".$ordernum_array[$a]."</h4>");
+    //Convert date format
+    $date = new DateTime($orders[$a][0][6]);
+    $day = $date->format('d-m-Y');
+    $hours = $date->format('H:i:s');
+
+    //Prints date order placed
+    echo("<h3>Order #".$ordernum_array[$a]."</h3><h4>Placed on ".$day." at ".$hours."</h4>");
 
     //Cycles through all products
-    echo("<table class='table-outline'> <tr><td>Product</td><td>Brand</td><td>price</td><td>qty</td><td>product subtotal</td></tr>");
+    echo("<table class='table-outline mb-0 mt-0'> <tr><td>Product</td><td>Brand</td><td>price/unit</td><td>qty</td><td>product subtotal</td></tr>");
     for ($b = 0; $b < sizeof($orders[$a][$b]); $b++){
         echo("<tr>");
         echo("<td>".$orders[$a][$b][2]."</td>");
@@ -80,7 +109,15 @@ for ($a = 0; $a < sizeof($ordernum_array); $a++){
         echo("<td>$".$orders[$a][$b][4]."</td>");
         echo("</tr>");
     }
-    echo("</table> <br>");
+
+    //echo("<tr><td colspan=\"5\" class=\"text-right\">Subtotal:$".$orders[$a][0][5]."</td></tr>");
+    //echo("<tr><td colspan=\"5\" class=\"text-right\">Tax:$".($orders[$a][0][5]*0.13)."</td></tr>");
+    //echo("<tr><td colspan=\"5\" class=\"text-right\">Total:$".$orders[$a][0][5]*1.13."</td></tr>");
+    echo("</table>");
+    echo("<p class='mt-0 mb-0'>Subtotal $".$orders[$a][0][5]."</p>");
+    echo("<p class='mt-0 mb-0'>Tax $".($orders[$a][0][5]*0.13)."</p>");
+    echo("<p class='mt-0 mb-0'>Total $".$orders[$a][0][5]*1.13."</p><br>");
+
 }
 
 

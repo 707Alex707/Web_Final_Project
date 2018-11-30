@@ -61,7 +61,6 @@ session_start();
         <div class="bg-grey span-vh m-auto w-90">
 
             <br>
-
             <div>
                 <h3 class="mb-0 mt-0">Contact Information</h3>
                 <p class="mb-0 mt-0">Number: 123 456 7890</p>

@@ -15,11 +15,45 @@
 ?> 
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
-    <h1>Shopping Cart</h1>
+    <!-- Navbar-->
+    
+    <div class="topnav">
+  <ul class="navbar-block">
+        
+    <li><a href="home.php">Home</a></li>
+    <li><a href="products.php">Products</a></li>
+    <li><a href="aboutus.php">About</a></li>
+    <li class="navbar-store">NAME OF STORE</li>
+
+    <li> <a href="cart.php" class="icon"> <i class="fa fa-shopping-cart" >
+    <?php 
+      if(isset($_SESSION["count"])){
+       echo $_SESSION["count"];
+      }
+    ?>
+    </i></a></li>
+
+    <li><a href="login.php" class="acc"> <?php 
+      if(isset($_SESSION["user"])) {
+        echo $_SESSION["user"];   
+        }else{
+          echo "Login"; 
+        }
+    ?>
+    </a></li>
+
+  </ul>
+  </div>
+
+    <!-- End of Navbar -->    
+
+    <h1><br>Shopping Cart</h1>
     <?php
     //When add to cart button is clicked increment quantity by 1 for each cart
     if(isset($_POST['add'])){
@@ -39,19 +73,20 @@
             if (substr($name, 0, 4)=='cart'){
                 $id = substr($name, 4, (strlen($name)-4));
                 $get =  mysqli_query($conn, "SELECT * FROM `products` WHERE id_product='$id' ");
-               ?> <form method="POST" oninput="x.value = qty.value *<?php echo $get_row['price'];?> "><?php
+               ?> <form method="POST" action="purchase.php" oninput="x.value = qty.value *<?php echo $get_row['price'];?> "><?php
                     
                     while($get_row = mysqli_fetch_assoc($get)){ ?>
                     
                     <img src="<?php echo $get_row["image"]; ?>" alt="<?php echo $get_row["name"];?>" class="img">
-                    <h4 class ="product_name"> <?php echo $get_row["brand"] . ' ' .$get_row["name"]; ?></h4> 
-                    <h4 class ="product_price">CAD$ 
+                    <h4> <?php echo $get_row["brand"] . ' ' .$get_row["name"]; ?></h4> 
+                    <h4>CAD$ 
                     <output name="x"><?php  $price =$get_row["price"]* $value; echo number_format($price,2). '<br>'; ?></h4> 
                     <input type="number" id="qty" name="qty" value="<?php echo  $value ?>" min ="1" max="<?php echo $get_row["qty"] ?>"> 
                     <button type="submit" name="update" value="<?php echo $get_row["id_product"]; ?>">Update</button>
                     <button type="submit" name="delete" value="<?php echo $get_row["id_product"]; ?>">Remove</button><br>
                     
                     <?php
+                   
                     //Don't Touch buggy af
                     $total += $price;
                     $counttotal =  $value + $counttotal;
@@ -76,34 +111,14 @@
     $_SESSION["total"] =$total;
     
     // ------------------------------------------------------------- End of the display of cart page -----------------------------------------------------------------------
+                // Returns to product page
+                if(isset($_POST['return'])){
+                    unset($_SESSION["count"]);
+                    $_SESSION["count"] = $counttotal;
+                    header('Location: products.php');
+                    
+                }
 
-        // Checkout
-        if(isset($_POST['checkout'])){
-            if ($_SESSION["total"] == 0){
-                echo "no products in your cart";
-            }else{
-                $_SESSION["user"] = $myusername;
-                header('Location: purchase.php');
-            }
-        }
-        // Returns to product page
-        if(isset($_POST['return'])){
-            unset($_SESSION["count"]);
-            $_SESSION["count"] = $counttotal;
-            header('Location: products.php');
-        }
-        //Remove item
-        if(isset($_POST['delete'])){
-            $_SESSION['cart'.$_POST['delete']]= '0';
-            $counttotal = $counttotal -  $value;
-            $_SESSION["count"] = $counttotal;
-            header('Location: cart.php');
-        }
-        // Update quantity of item
-        if(isset($_POST['update'])){
-            $_SESSION['cart'.$_POST['update']]= $_POST['qty'];
-            header('Location: cart.php');
-        }
         ?>
 
 </body>

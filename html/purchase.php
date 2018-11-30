@@ -106,6 +106,31 @@
      
         header('Location: products.php');   //Change to proper order history page
    }
+
+   // Checkout
+   if(isset($_POST['checkout'])){
+    if ($_SESSION["total"] == 0){
+        echo "no products in your cart";
+    }else{
+        $_SESSION["user"] = $myusername;
+        header('Location: purchase.php');
+    }
+}
+//Remove item
+if(isset($_POST['delete'])){
+    $_SESSION['cart'.$_POST['delete']]= '0';
+    $counttotal = $counttotal   -  $value;
+    $_SESSION["count"] = $counttotal;
+    header('Location: cart.php');
+}
+// Update quantity of item
+if(isset($_POST['update'])){
+    $_SESSION['cart'.$_POST['update']]= $_POST['qty'];
+    header('Location: cart.php');
+}
+  
+  
+  
   } else {
     header('Location:register.php');
   }

@@ -8,7 +8,7 @@ var modal = document.getElementsByClassName('modal');
 
 function showModal(x){
 // Get the button that opens the modal
-var img = document.getElementsByClassName("img")[x-1];
+var img = document.getElementsByClassName("divmodal")[x-1];
 
 
 // Get the <span> element that closes the modal

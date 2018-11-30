@@ -1,5 +1,7 @@
 /*
 Validation functions for billing and payment information
+Author: Anson Tu
+Created on: 11/30/2018
 */
 
 /*
@@ -14,15 +16,15 @@ function validBillingInfo() {
     var province = document.getElementById("state").value;
     var postalCode = document.getElementById("zip").value;
     //Create regex sequences to validate the user's input
-    var nameCheck = /^[A-Z]{1}[a-z]{1,} [A-Z]{1}[a-z]{1,}$/;
-    var addressCheck = /^[0-9]{0,5} [A-Z]{1}[a-z]{1,} [A-Z]{1}[a-z]{1,}$/;
+    var nameCheck = /^[A-Za-z]{1,}+ +[A-Za-z]{1,}$/;
+    var addressCheck = /^[0-9]{0,5} [A-Za-z]{1,} [A-Za-z]{1,}$/;
     var cityCheck = /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/;
     var provinceCheck = /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/;
-    var postalCheck = /^[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ][0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]$/;
+    var postalCheck = /^[ABCEGHJKLMNPRSTVXYabcrghjklmnprstvxy][0-9][ABCEGHJKLMNPRSTVWXYZabcrghjklmnprstvxy][0-9][ABCEGHJKLMNPRSTVWXYZabcrghjklmnprstvxy][0-9]$/;
     //Compare the user's input to the regex sequences. If there are any errors, stop submitting, and output an error message
     if (name == "" || email == "" || address == "" || city == "" || province == "" || postalCode == "") {
         event.preventDefault(); //One or more fields were left empty
-        alert("One or more fields need to be filled");
+        alert("One or more fields for the billing address need to be filled");
     } else if (!nameCheck.exec(name)) {
         event.preventDefault(); //Error with the user's name
         alert("Invalid billing name" + "\n" + "Ex: John Doe");
@@ -52,15 +54,15 @@ function validCreditInfo() {
     var expYear = document.getElementById("expyear").value;
     var cvv = document.getElementById("cvv").value;
     //Create regex sequences to validate the user's input
-    var cNameCheck = /^[A-Z]{1}[a-z]{1,} [A-Z]{1}[a-z]{1,}$/;
-    var cardNumCheck = /^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$/;
+    var cNameCheck = /^[A-Za-z]{1,}+ +[A-Za-z]{1,}$/;
+    var cardNumCheck = /^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$|[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}$|[0-9]{16}$/;
     var expMonthCheck = /^January$|February$|March$|April$|May$|June$|July$|August$|September$|October$|November$|December$/
     var expYearCheck = /^201[8-9]{1}$|20[2-9]{1}[0-9]{1}$/;
     var cvvCheck = /^[0-9]{3}$/;
     //Compare the user's input to the regex sequences. If there are any errors, stop submitting, and output an error message
     if (cName == "" || cardNum == "" || expMonth == "" || expYear == "" || cvv == "") {
         event.preventDefault(); //One or more fields were left empty
-        alert("One or more fields need to be filled");
+        alert("One or more fields for the payment information need to be filled");
     } else if (!cNameCheck.exec(cName)) {
         event.preventDefault(); //Error with the credit card owner's name
         alert("Invalid credit card owner name" + "\n" + "Ex: John Doe");

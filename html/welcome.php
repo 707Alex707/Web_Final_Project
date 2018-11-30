@@ -23,6 +23,7 @@ if(isset($_SESSION["user"]))
             <li><a href="home.php">Home</a></li>
             <li><a href="products.php">Products</a></li>
             <li><a href="aboutus.php">About</a></li>
+            <li><a href="faq.php">FAQ</a></li>
             <li class="navbar-store">NAME OF STORE</li>
             <li><a href="#" class="acc"> <?php echo $_SESSION["user"]; ?> <i class="material-icons" id="icon">person</i></a> </li>
         </ul>

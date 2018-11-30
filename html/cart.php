@@ -29,6 +29,7 @@
     <li><a href="home.php">Home</a></li>
     <li><a href="products.php">Products</a></li>
     <li><a href="aboutus.php">About</a></li>
+    <li><a href="faq.php">FAQ</a></li>
     <li class="navbar-store">NAME OF STORE</li>
 
     <li> <a href="cart.php" class="icon"> <i class="fa fa-shopping-cart" >
@@ -73,33 +74,35 @@
             if (substr($name, 0, 4)=='cart'){
                 $id = substr($name, 4, (strlen($name)-4));
                 $get =  mysqli_query($conn, "SELECT * FROM `products` WHERE id_product='$id' ");
-               ?> <form method="POST" action="purchase.php" oninput="x.value = qty.value *<?php echo $get_row['price'];?> "><?php
+               
                     
                     while($get_row = mysqli_fetch_assoc($get)){ ?>
-                    
+                    <form id="productform" method="POST" action="purchase.php" oninput="x.value = qty.value *<?php echo $get_row['price'];?> ">
                     <img src="<?php echo $get_row["image"]; ?>" alt="<?php echo $get_row["name"];?>" class="img">
                     <h4> <?php echo $get_row["brand"] . ' ' .$get_row["name"]; ?></h4> 
                     <h4>CAD$ 
                     <output name="x"><?php  $price =$get_row["price"]* $value; echo number_format($price,2). '<br>'; ?></h4> 
-                    <input type="number" id="qty" name="qty" value="<?php echo  $value ?>" min ="1" max="<?php echo $get_row["qty"] ?>"> 
+                    <input type="number" id="qty" name="qty<?php echo $get_row["id_product"]; ?>" value="<?php echo  $value ?>" min ="1" max="<?php echo $get_row["qty"] ?>"> 
                     <button type="submit" name="update" value="<?php echo $get_row["id_product"]; ?>">Update</button>
                     <button type="submit" name="delete" value="<?php echo $get_row["id_product"]; ?>">Remove</button><br>
-                    
+                    </form>
                     <?php
                    
                     //Don't Touch buggy af
+                    $_SESSION['value'.$get_row["id_product"]] = $value;
                     $total += $price;
                     $counttotal =  $value + $counttotal;
+                    
                     }
             }
                
         }
     }
-    ?>
+                ?>
        
-    
-    <button type="submit" name="checkout">Checkout</button>
-</form>
+                    <form method="POST" action="purchase.php">
+                    <button type="submit" name="checkout" form="productform">Checkout</button>
+                    </form>
     <form method="POST">
     <button name="return" >Continue Shopping</button>
     </form>
@@ -108,6 +111,7 @@
     echo '<h3> Total: '.number_format($total,2).'</h3>';
     // To test counter lmao
     echo $counttotal;
+    $_SESSION["counttotal"]= $counttotal;
     $_SESSION["total"] =$total;
     
     // ------------------------------------------------------------- End of the display of cart page -----------------------------------------------------------------------

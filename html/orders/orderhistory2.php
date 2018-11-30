@@ -27,6 +27,7 @@ session_start();
         <li><a href="../home.php">Home</a></li>
         <li><a href="../products.php">Products</a></li>
         <li><a href="../aboutus.php">About</a></li>
+        <li><a href="../faq.php">FAQ</a></li>
         <li class="navbar-store">NAME OF STORE</li>
 
         <li><a href="../cart.php" class="icon"> <i class="fa fa-shopping-cart">

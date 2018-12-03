@@ -16,11 +16,49 @@
 
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="js/infoValidation.js"></script>
 </head>
 <body>
+    <!-- Navbar-->
+    
+    <div class="topnav">
+  <ul class="navbar-block">
+        
+    <li><a href="home.php">Home</a></li>
+    <li><a href="products.php">Products</a></li>
+    <li><a href="aboutus.php">About</a></li>
+    <li><a href="faq.php">FAQ</a></li>
+    <li class="navbar-store">NAME OF STORE</li>
 
+    <li> <a href="cart.php" class="icon"> <i class="fa fa-shopping-cart" >
+    <?php 
+      if(isset($_SESSION["counttotal"])){
+       echo $_SESSION["counttotal"];
+      }
+    ?>
+    </i></a></li>
 
-      <form method = "POST" action="OrderSubmit.php">
+    <li><a href="login.php" class="acc"> <?php 
+      if(isset($_SESSION["user"])) {
+        echo $_SESSION["user"];   
+        }else{
+          echo "Login"; 
+        }
+    ?>
+    </a></li>
+
+  </ul>
+  </div>
+
+    <!-- End of Navbar -->  
+    <!---onsubmit="validInfo()" --->
+    <div class="billing">
+      <form method = "POST" onsubmit="validInfo()" action="OrderSubmit.php">
+      <br>
+      <br>
             <h3>Billing Address</h3>
             <label for="fname">Full Name</label>
             <input type="text" id="fname" name="firstname" placeholder="John Smith"><br>
@@ -51,14 +89,10 @@
             <input type="text" id="cname" name="cardname" placeholder="John Smith"><br>
             <label for="ccnum">Credit card number</label>
             <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444"><br>
-            <label for="expmonth">Exp Month</label>
-            <input type="text" id="expmonth" name="expmonth" placeholder="September"><br>
+            <label for="expmonth">Exp. Date</label>
+            <input type="month" id="expdate" name="expdate" placeholder="September"><br>
 
             <div class="row">
-              <div>
-                <label for="expyear">Exp Year</label>
-                <input type="text" id="expyear" name="expyear" placeholder="2018"><br>
-              </div>
               <div>
                 <label for="cvv">CVV</label>
                 <input type="text" id="cvv" name="cvv" placeholder="352"><br>
@@ -74,7 +108,7 @@
       </form>
     </div>
   </div>
-
+      </div>
   <div>
     <div>
       <h4>Cart 
@@ -102,11 +136,36 @@
       <p>Total <span class="price"><b><?php echo number_format($_SESSION["total"],2);?></b></span></p>
     </div>
   </div>
-  <?php if (isset($_POST['pay'])){
-     
-        header('Location: products.php');   //Change to proper order history page
-   }
+  <?php 
+  
+  } else {
+    header('Location:register.php');
+  }
+  ?>
+</div>
 
+
+</body>
+</html>
+<?php
+
+//Remove item
+if(isset($_POST['delete'])){
+    $_SESSION['cart'.$_POST['delete']]= '0';
+    $value = $_SESSION['value'.$_POST['delete']];
+    $counttotal = $_SESSION["counttotal"];
+    $counttotal = $counttotal   -  $value;
+    $_SESSION["count"] = $counttotal;
+    header('Location: cart.php');
+}
+// Update quantity of item
+if(isset($_POST['update'])){
+    $_SESSION['cart'.$_POST['update']]= $_POST['qty'.$_POST['update']];//qty of the product
+    $qty =  $_SESSION['cart'.$_POST['update']]; //qty of the product
+    $counttotal =  $_SESSION["counttotal"] + $qty; //Total product number = quantity of products + otal product number
+    $_SESSION["count"] = $counttotal; //Set to ouput count`
+    header('Location: cart.php');
+}
    // Checkout
    if(isset($_POST['checkout'])){
     if ($_SESSION["total"] == 0){
@@ -116,25 +175,4 @@
         header('Location: purchase.php');
     }
 }
-//Remove item
-if(isset($_POST['delete'])){
-    $_SESSION['cart'.$_POST['delete']]= '0';
-    $counttotal = $counttotal   -  $value;
-    $_SESSION["count"] = $counttotal;
-    header('Location: cart.php');
-}
-// Update quantity of item
-if(isset($_POST['update'])){
-    $_SESSION['cart'.$_POST['update']]= $_POST['qty'];
-    header('Location: cart.php');
-}
-  
-  
-  
-  } else {
-    header('Location:register.php');
-  }
-  ?>
-</div>
-</body>
-</html>
+?>

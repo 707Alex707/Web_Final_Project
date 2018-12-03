@@ -16,11 +16,11 @@ function validBillingInfo() {
     var province = document.getElementById("state").value;
     var postalCode = document.getElementById("zip").value;
     //Create regex sequences to validate the user's input
-    var nameCheck = /^[A-Za-z]{1,}+ +[A-Za-z]{1,}$/;
-    var addressCheck = /^[0-9]{0,5} [A-Za-z]{1,} [A-Za-z]{1,}$/;
+    var nameCheck = /^[A-Za-z]{1,} [A-Za-z]{1,}$/;
+    var addressCheck = /^[0-9]{0,5} [A-Za-z]{1,} [A-Za-z]{1,}$|^[0-9]{0,5} [A-Za-z]{1,} [A-Za-z]{1,} [A-Za-z]{1,}$|^[0-9]{0,5} [A-Za-z]{1,} [A-Za-z]{1,} [A-Za-z]{1}$/;
     var cityCheck = /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/;
     var provinceCheck = /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/;
-    var postalCheck = /^[ABCEGHJKLMNPRSTVXYabcrghjklmnprstvxy][0-9][ABCEGHJKLMNPRSTVWXYZabcrghjklmnprstvxy][0-9][ABCEGHJKLMNPRSTVWXYZabcrghjklmnprstvxy][0-9]$/;
+    var postalCheck = /^[ABCEGHJKLMNPRSTVXYabcrghjklmnprstvxy][0-9][ABCEGHJKLMNPRSTVWXYZabceghjklmnprstvwxyz][0-9][ABCEGHJKLMNPRSTVWXYZabceghjklmnprstvwxyzs][0-9]$/;
     //Compare the user's input to the regex sequences. If there are any errors, stop submitting, and output an error message
     if (name == "" || email == "" || address == "" || city == "" || province == "" || postalCode == "") {
         event.preventDefault(); //One or more fields were left empty
@@ -50,17 +50,17 @@ function validCreditInfo() {
     //Save the user's input
     var cName = document.getElementById("cname").value;
     var cardNum = document.getElementById("ccnum").value;
-    var expMonth = document.getElementById("expmonth").value;
-    var expYear = document.getElementById("expyear").value;
+    var expDate = document.getElementById("expdate").value;
     var cvv = document.getElementById("cvv").value;
     //Create regex sequences to validate the user's input
-    var cNameCheck = /^[A-Za-z]{1,}+ +[A-Za-z]{1,}$/;
-    var cardNumCheck = /^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$|[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}$|[0-9]{16}$/;
-    var expMonthCheck = /^January$|February$|March$|April$|May$|June$|July$|August$|September$|October$|November$|December$/
-    var expYearCheck = /^201[8-9]{1}$|20[2-9]{1}[0-9]{1}$/;
+    var cNameCheck = /^[A-Za-z]{1,} [A-Za-z]{1,}$/;
+    var cardNumCheck = /^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$|^[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}$|^[0-9]{16}$/;
+    var expDateCheck = "2018-11";
+    //var expMonthCheck = /^January$|February$|March$|April$|May$|June$|July$|August$|September$|October$|November$|December$/
+    //var expYearCheck = /^201[8-9]{1}$|^20[2-9]{1}[0-9]{1}$/;
     var cvvCheck = /^[0-9]{3}$/;
     //Compare the user's input to the regex sequences. If there are any errors, stop submitting, and output an error message
-    if (cName == "" || cardNum == "" || expMonth == "" || expYear == "" || cvv == "") {
+    if (cName == "" || cardNum == "" || expDate == "" || cvv == "") {
         event.preventDefault(); //One or more fields were left empty
         alert("One or more fields for the payment information need to be filled");
     } else if (!cNameCheck.exec(cName)) {
@@ -68,13 +68,10 @@ function validCreditInfo() {
         alert("Invalid credit card owner name" + "\n" + "Ex: John Doe");
     } else if (!cardNumCheck.exec(cardNum)) {
         event.preventDefault(); //Error with the credit card number
-        alert("Invalid credit card number" + "\n" + "Ex: 1111-2222-3333-4444");
-    } else if (!expMonthCheck.exec(expMonth)) {
+        alert("Invalid credit card number" + "\n" + "Ex: 1111-2222-3333-4444, 1111 2222 3333 4444, 1111222233334444");
+    } else if (expDate <= expDateCheck) {
         event.preventDefault(); //Error with the credit card expiration month
-        alert("Invalid card expiry month" + "\n" + "Ex: January");
-    } else if (!expYearCheck.exec(expYear)) {
-        event.preventDefault(); //Error with the credit card expiration year
-        alert("Invalid card expiry year" + "\n" + "Ex: 2020");
+        alert("Invalid card expiry date" + "\n" + "Ex: January 2020");
     } else if (!cvvCheck.exec(cvv)) {
         event.preventDefault(); //Error with the credit card cvv
         alert("Invalid card cvv" + "\n" + "Ex: 123");

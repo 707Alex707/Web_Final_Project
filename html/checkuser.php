@@ -82,7 +82,7 @@ if(isset($_POST['register'])){
 
 ?>
 
-<script src="modal.js"></script>
+<script src="js/modal.js"></script>
 </body>
 
 </html>

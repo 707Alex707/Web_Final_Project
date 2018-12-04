@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Sign up</title>
-        <link rel="stylesheet" type="text/css" href="assignment3.css">
+        <link rel="stylesheet" type="text/css" href="css/assignment3.css">
     </head>
     <body>
     <div class= "block">

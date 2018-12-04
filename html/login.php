@@ -4,7 +4,7 @@ if (!isset($_SESSION['user'])){?>
 <html>
     <head>
         <title>Login Page</title>
-        <link rel="stylesheet" type="text/css" href="assignment3.css">
+        <link rel="stylesheet" type="text/css" href="css/assignment3.css">
         
     </head>
     <body>
@@ -52,3 +52,8 @@ if (!isset($_SESSION['user'])){?>
         header('Location:welcome.php');
     }
         ?>
+
+
+
+
+    

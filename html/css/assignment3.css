@@ -1,0 +1,86 @@
+
+ 
+.block{
+    margin: auto;
+    top: 200px;
+    width: 1000px; 
+    height: 600px;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    margin-top: 150px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.sideblock {
+    height: 600px; 
+    width: 200px; 
+    background-color: rgb(192, 17, 17); 
+    display: inline-block;
+    
+}   
+ .main{
+    position: absolute;
+    top: 170px;
+    padding-left: 100px;
+    font-size: 20px;
+    display: inline-block;
+    font-style: 'Assistant';
+
+}
+button{
+    border: none;
+    width: 200px;
+    font-size: 11px;
+    background-color: rgb(192, 17, 17);
+    color: white;
+    padding: 15px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: 'Assistant';
+}
+.btn {
+    position: relative;
+    bottom: 0px;
+    right: 0px; 
+    width: 200px;
+    border: none;
+    font-size: 16px;
+    background-color: rgb(192, 17, 17);
+    color: white;
+    padding: 15px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: 'Assistant';
+ 
+}
+p{
+    font-size: 14px;
+}
+#label{
+  
+    font-size: 30px;
+    font-family: 'Bree Serif';
+
+
+}
+.text{
+    font-size: 20px;
+    height: 40px;
+    border:none;   
+    width: 300px;
+    border-bottom: 1px solid grey;
+    font-family: 'Assistant';
+}
+form{
+    padding: 10px;
+}
+.form-content{
+    font-family:'Assistant';
+    font-size: 20px;
+}
+.error{
+    margin-top: -10px;
+    font-size: 16px;
+    color: red;
+}

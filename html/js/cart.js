@@ -13,7 +13,7 @@ function result(){
     var w =addCart();
    
     var total = (w);
-    document.getElementById("demo").innerHTML = total;
+    document.getElementsByClassName("icon").innerHTML = total;
    // document.getElementById("aftertax").innerHTML = (total*1.13).toFixed(2);
     
 }

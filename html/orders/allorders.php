@@ -19,6 +19,7 @@ session_start();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
+
 <body>
 
 <!-- Navbar-->
@@ -28,7 +29,7 @@ session_start();
         <li><a href="../products.php">Products</a></li>
         <li><a href="../aboutus.php">About</a></li>
         <li><a href="../faq.php">FAQ</a></li>
-        <li class="navbar-store">NAME OF STORE</li>
+        <li class="navbar-store">UOIT Shoes</li>
 
         <li><a href="../cart.php" class="icon"> <i class="fa fa-shopping-cart">
                     <?php
